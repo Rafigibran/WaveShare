@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#05070b" />
+  <meta name="description" content="WaveShare — kirim file langsung antar perangkat melalui browser." />
+  <title>WaveShare — P2P File Transfer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">W</span><span>WaveShare</span></div>
+    <nav class="actions" aria-label="Pengaturan">
+      <button class="icon-btn" id="shareBtn" title="Bagikan room" aria-label="Bagikan room">↗</button>
+      <button class="icon-btn" id="qrBtn" title="Tampilkan QR" aria-label="Tampilkan QR">⌁</button>
+      <button class="icon-btn" id="nameBtn" title="Ganti nama perangkat" aria-label="Ganti nama perangkat">✎</button>
+      <button class="icon-btn" id="helpBtn" title="Privasi dan bantuan" aria-label="Privasi dan bantuan">i</button>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="hero-card">
+      <div class="eyebrow"><span class="status-dot"></span><span id="connectionText">Menghubungkan…</span></div>
+      <h1>Kirim file ke perangkat apa pun.</h1>
+      <p class="subtitle">Satu room, banyak perangkat. File dikirim langsung antar browser lewat koneksi P2P.</p>
+
+      <div class="radar" aria-hidden="true">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+        <div class="ring ring-4"></div>
+        <div class="radar-core"><span></span></div>
+        <div id="radarPeers" class="radar-peers"></div>
+      </div>
+
+      <div class="identity">
+        <span>Anda dikenal sebagai</span>
+        <button id="deviceName" class="name-chip">…</button>
+      </div>
+      <div class="room-row">
+        <span>Room</span>
+        <button id="roomChip" class="room-chip" title="Salin room">…</button>
+      </div>
+
+      <div id="peerList" class="peer-list" aria-live="polite"></div>
+
+      <div class="drop-zone" id="dropZone" tabindex="0">
+        <input id="fileInput" type="file" multiple hidden />
+        <div class="upload-icon">↑</div>
+        <div>
+          <strong>Tarik file ke sini</strong>
+          <span>atau ketuk untuk memilih file</span>
+        </div>
+        <button class="primary" id="chooseBtn">Pilih file</button>
+      </div>
+
+      <div class="hint">Tip: buka link room yang sama di perangkat lain. Tidak perlu akun.</div>
+    </section>
+
+    <section id="transfers" class="transfers" hidden>
+      <div class="section-title"><span>Transfer aktif</span><button id="clearTransfers" class="ghost">Bersihkan</button></div>
+      <div id="transferList"></div>
+    </section>
+  </main>
+
+  <dialog id="dialog">
+    <div class="dialog-inner">
+      <div class="dialog-head"><h2 id="dialogTitle">WaveShare</h2><button class="icon-btn" id="closeDialog">×</button></div>
+      <div id="dialogBody"></div>
+    </div>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>
